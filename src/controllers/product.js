@@ -3,7 +3,22 @@ const { Product } = require("../lib/sequelize");
 const productControllers = {
   getAllProducts: async (req, res) => {
     try {
-      const getProducts = await Product.findAll();
+      const {_limit = 4, _sortBy = "", _sortDir = "", _page = 1} = req.query 
+
+      delete req.query._sortBy
+      delete req.query._page
+      delete req.query._sortDir
+      delete req.query._limit
+
+      const getProducts = await Product.findAndCountAll({
+          where: {
+              ...req.query
+          },
+          limit: _limit? parseInt(_limit) : undefined,
+          offset: (_page - 1) * _limit,
+          distinct: true,
+          order: _sortBy ? [[_sortBy, _sortDir]] : undefined
+      });
 
       return res.status(201).json({
         message: "get all product",
