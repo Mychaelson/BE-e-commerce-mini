@@ -1,10 +1,9 @@
-
-const authControllers = require("./auth");
+const userController = require("./users")
 const productControllers = require("./product");
 const cartController = require("./cart");
 
 module.exports = {
-  authControllers,
   productControllers,
   cartController,
+  userControllers
 };

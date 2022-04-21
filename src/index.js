@@ -15,13 +15,15 @@ app.use(express.json());
 
 const { productRoutes, authRoutes, CartRoutes } = require("./routes");
 
+const { userRoutes } = require("./routers")
 app.use("/products", productRoutes);
-app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 app.use("/cart", CartRoutes);
 
 app.get("/", (req, res) => {
   res.send("<h1>e-commerce mini</h1>");
 });
+
 
 app.listen(PORT, () => {
   console.log("Listening in Port", PORT);
