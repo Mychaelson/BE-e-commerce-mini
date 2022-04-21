@@ -12,16 +12,16 @@ sequelize.sync({ alter: true });
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 const { productRoutes, authRoutes, CartRoutes } = require("./routes");
 
 app.use("/products", productRoutes);
 app.use("/auth", authRoutes);
+app.use("/cart", CartRoutes);
 
 app.get("/", (req, res) => {
   res.send("<h1>e-commerce mini</h1>");
 });
-
-app.use("/cart", CartRoutes);
 
 app.listen(PORT, () => {
   console.log("Listening in Port", PORT);
