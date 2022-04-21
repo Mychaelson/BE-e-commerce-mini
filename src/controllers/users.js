@@ -11,30 +11,67 @@ const userController = {
 
       // Checking if username/email already has taken
       const findUserAlreadyTaken = await User.findOne({
-          where: {
-              [Op.or]: [{ username }, { email }]
-          }
-      })
+        where: {
+          [Op.or]: [{ username }, { email }],
+        },
+      });
       if (findUserAlreadyTaken) {
-          return res.status(400).json({
-              message: "Username or Email has already taken"
-          })
+        return res.status(400).json({
+          message: "Username or Email has already taken",
+        });
       }
-    
+
       // Creating new account
-      const hashedPassword = bcrypt.hashSync(password, 5)
+      const hashedPassword = bcrypt.hashSync(password, 5);
       const createNewAccount = await User.create({
-          username,
-          password: hashedPassword,
-          email
-      })
+        username,
+        password: hashedPassword,
+        email,
+      });
       return res.status(200).json({
-          message: "Account created successfuly!",
-          result: createNewAccount
-      })
+        message: "Account created successfuly!",
+        result: createNewAccount,
+      });
     } catch (err) {
       console.log(err);
       res.status(500).json({
+        message: "Server Error",
+      });
+    }
+  },
+  loginUser: async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const findUser = await User.findOne({
+        where: {
+          username,
+        },
+      });
+      if (!findUser) {
+        return res.status(401).json({
+          message: "Username or Password invalid",
+        });
+      }
+      const isPasswordCorrect = bcrypt.compareSync(password, findUser.password);
+      if (!isPasswordCorrect) {
+        return res.status(401).json({
+          message: "Username or Password invalid",
+        });
+      }
+      delete findUser.dataValues.password;
+      const token = generateToken({
+        id: findUser.id,
+      });
+      return res.status(200).json({
+        message: "Logged in user",
+        result: {
+          user: findUser,
+          token,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
         message: "Server Error",
       });
     }
