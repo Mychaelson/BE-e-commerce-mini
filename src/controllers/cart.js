@@ -1,9 +1,11 @@
-const { Cart } = require("../lib/sequelize");
+const { Cart, Product } = require("../lib/sequelize");
 
 const cartController = {
   getCartItems: async (req, res) => {
     try {
-      const cartItems = await Cart.findAll();
+      const cartItems = await Cart.findAll({
+        include: Product,
+      });
 
       if (!cartItems.length) {
         return res.status(400).json({
