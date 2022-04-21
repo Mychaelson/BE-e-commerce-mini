@@ -19,7 +19,7 @@ const cartController = {
       });
     } catch (err) {
       console.log(err);
-      res.status(500).json({
+      return res.status(500).json({
         message: "Server Error",
       });
     }
@@ -60,7 +60,71 @@ const cartController = {
       });
     } catch (err) {
       console.log(err);
-      res.status(500).json({
+      return res.status(500).json({
+        message: "Server Error",
+      });
+    }
+  },
+  editCartQuantity: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { product_id, user_id, quantity } = req.body;
+
+      const checkCart = await Cart.findByPk(id);
+
+      if (!checkCart) {
+        return res.status(400).json({
+          message: "The particular items not found in your cart",
+        });
+      }
+
+      await Cart.update(
+        {
+          quantity,
+        },
+        {
+          where: {
+            id,
+            product_id,
+            user_id,
+          },
+        }
+      );
+
+      return res.status(200).json({
+        message: "Item quantity edited from cart",
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        message: "Server Error",
+      });
+    }
+  },
+  deleteCartItem: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const checkCart = await Cart.findByPk(id);
+
+      if (!checkCart) {
+        return res.status(400).json({
+          message: "The particular items not found in your cart",
+        });
+      }
+
+      await Cart.destroy({
+        where: {
+          id,
+        },
+      });
+
+      return res.status(200).json({
+        message: "Item deleted from cart",
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
         message: "Server Error",
       });
     }
