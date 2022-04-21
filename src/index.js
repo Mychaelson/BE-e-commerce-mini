@@ -13,9 +13,12 @@ const app = express();
 app.use(cors())
 app.use(express.json())
 
-app.use("/", (req, res) => {
-  res.send("<h1>e-commerce mini</h1>");
-});
+// app.use("/", (req, res) => {
+//   res.send("<h1>e-commerce mini</h1>");
+// });
+
+const { userRoutes } = require("./routers")
+app.use("/user", userRoutes)
 
 app.listen(PORT, () => {
   console.log("Listening in Port", PORT);
