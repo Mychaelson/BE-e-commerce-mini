@@ -1,2 +1,5 @@
-const authControllers = {};
-module.exports = authControllers;
+const authControllers = {
+  
+}
+module.exports = authControllers
+

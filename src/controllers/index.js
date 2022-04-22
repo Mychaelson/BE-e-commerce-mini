@@ -5,5 +5,6 @@ const cartController = require("./cart");
 module.exports = {
   productControllers,
   cartController,
-  userControllers
+  userController
 };
+
