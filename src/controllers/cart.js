@@ -85,8 +85,6 @@ const cartController = {
         {
           where: {
             id,
-            product_id,
-            user_id,
           },
         }
       );
