@@ -24,9 +24,6 @@ app.get("/", (req, res) => {
   res.send("<h1>e-commerce mini</h1>");
 });
 
-
-
-
 app.listen(PORT, () => {
   console.log("Listening in Port", PORT);
 });
