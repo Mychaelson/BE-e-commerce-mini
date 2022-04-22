@@ -3,8 +3,12 @@ const { Cart, Product } = require("../lib/sequelize");
 const cartController = {
   getCartItems: async (req, res) => {
     try {
+      const { userId } = req.params;
       const cartItems = await Cart.findAll({
         include: Product,
+        where: {
+          user_id: userId,
+        },
       });
 
       if (!cartItems.length) {
