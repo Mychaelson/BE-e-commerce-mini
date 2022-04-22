@@ -1,4 +1,6 @@
+
 const { Op } = require("sequelize");
+
 const { Product } = require("../lib/sequelize");
 
 const productControllers = {
@@ -46,7 +48,6 @@ const productControllers = {
         result: newProduct,
       });
     } catch (err) {
-      //   console.log(err);
       return res.status(500).json({
         message: "server error",
       });
