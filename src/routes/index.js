@@ -1,10 +1,10 @@
-const authRoutes = require("./auth")
-const productRoutes = require("./products")
+
+const productRoutes = require("./products");
+const CartRoutes = require("./cart");
 const userRoutes = require("./users")
 
-
 module.exports = {
-    authRoutes,
-    productRoutes,
-    userRoutes
-}
+  productRoutes,
+  CartRoutes,
+  userRoutes
+};
