@@ -1,3 +1,4 @@
+const { json } = require("express/lib/response");
 const { Op } = require("sequelize");
 const { Product } = require("../lib/sequelize");
 
@@ -23,6 +24,12 @@ const productControllers = {
         distinct: true,
         order: _sortBy ? [[_sortBy, _sortDir]] : undefined,
       });
+
+      if (!getProducts) {
+        return res.status(400),json({
+          message: "Product not Found"
+        })
+      }
 
       return res.status(201).json({
         message: "get all product",

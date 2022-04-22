@@ -20,7 +20,6 @@ app.use("/user", userRoutes)
 app.use("/products", productRoutes);
 app.use("/user", userRoutes);
 app.use("/cart", CartRoutes);
-app.use("/auth", authRoutes)
 
 app.get("/", (req, res) => {
   res.send("<h1>e-commerce mini</h1>");
