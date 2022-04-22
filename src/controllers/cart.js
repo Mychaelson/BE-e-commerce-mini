@@ -90,7 +90,7 @@ const cartController = {
       );
 
       return res.status(200).json({
-        message: "Item quantity edited from cart",
+        message: "Item's quantity edited from cart",
       });
     } catch (err) {
       console.log(err);
