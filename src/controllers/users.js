@@ -76,7 +76,6 @@ const userController = {
       });
     }
   },
-
   keepLogin: async (req, res) => {
     try {
       const { token } = req
@@ -96,7 +95,6 @@ const userController = {
       })
     }
   }
-
 };
 
 module.exports = userController;
