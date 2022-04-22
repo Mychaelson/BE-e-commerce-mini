@@ -1,4 +1,4 @@
 const authControllers = {
   
 }
-module.exports = authControllerss
+module.exports = authControllers

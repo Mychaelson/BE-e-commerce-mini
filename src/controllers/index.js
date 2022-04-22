@@ -1,4 +1,4 @@
-const userController = require("./users")
+const userControllers = require("./users")
 const authControllers = require("./auth")
 const productControllers = require("./products")
 

@@ -21,7 +21,7 @@ app.use("/auth", authRoutes)
 //   res.send("<h1>e-commerce mini</h1>");
 // });
 
-const { userRoutes } = require("./routers")
+const { userRoutes } = require("./routes")
 app.use("/user", userRoutes)
 
 app.listen(PORT, () => {
