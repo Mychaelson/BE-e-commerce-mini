@@ -1,12 +1,9 @@
-const productControllers = require("./product")
+const userController = require("./users")
+const productControllers = require("./product");
+const cartController = require("./cart");
 
 module.exports = {
-<<<<<<< Updated upstream
-    productControllers
-}
-=======
   productControllers,
   cartController,
   userController
 };
->>>>>>> Stashed changes

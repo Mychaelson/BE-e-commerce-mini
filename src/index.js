@@ -13,20 +13,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-<<<<<<< Updated upstream
-const { productRoutes } = require("./routes");
-=======
-const {
-  productRoutes,
-  authRoutes,
-  CartRoutes,
-  userRoutes,
-} = require("./routes");
 
+const { productRoutes, authRoutes, CartRoutes, userRoutes } = require("./routes");
+
+app.use("/user", userRoutes)
 app.use("/products", productRoutes);
 app.use("/user", userRoutes);
 app.use("/cart", CartRoutes);
->>>>>>> Stashed changes
+app.use("/auth", authRoutes)
 
 app.get("/", (req, res) => {
   res.send("<h1>e-commerce mini</h1>");
