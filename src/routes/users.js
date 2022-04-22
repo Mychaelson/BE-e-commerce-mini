@@ -1,10 +1,10 @@
-const { userController } = require("../controllers")
+const { userControllers } = require("../controllers")
 
 const router = require("express").Router()
 
-router.post("/register", userController.registerUser)
-router.post("/login", userController.loginUser)
-router.get("/refresh-token", userController.keepLogin)
+router.post("/register", userControllers.registerUser)
+router.post("/login", userControllers.loginUser)
+router.get("/refresh-token", userControllers.keepLogin)
 
 
 
