@@ -76,6 +76,25 @@ const userController = {
       });
     }
   },
+  keepLogin: async (req, res) => {
+    try {
+      const { token } = req
+      const newToken = generateToken( { id: token.id })
+      const findUser = await User.findByPk(token.id)
+
+      delete findUser.dataValues.password
+      return res.status(200).json({
+        message: "New user token generated",
+        result: findUser,
+        token: newToken
+      })
+    } catch (err) {
+      console.log(err)
+      return res.status(500).json({
+        message: "Server Error"
+      })
+    }
+  }
 };
 
 module.exports = userController;
