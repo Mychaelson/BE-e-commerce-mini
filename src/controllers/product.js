@@ -25,13 +25,13 @@ const productControllers = {
         order: _sortBy ? [[_sortBy, _sortDir]] : undefined,
       });
 
-      if (!getProducts) {
-        return res.status(400),json({
-          message: "Product not Found"
-        })
+      if (!getProducts.count) {
+        return res.status(400).json({
+          message: "Product not Found",
+        });
       }
 
-      return res.status(201).json({
+      return res.status(200).json({
         message: "get all product",
         result: getProducts,
       });
@@ -54,6 +54,29 @@ const productControllers = {
       });
     } catch (err) {
       //   console.log(err);
+      return res.status(500).json({
+        message: "server error",
+      });
+    }
+  },
+  getOneProduct: async (req, res) => {
+    try {
+      const { id } = req.params;
+      console.log(id);
+      const getProduct = await Product.findByPk(id);
+
+      if (!getProduct) {
+        return res.status(400).json({
+          message: "Product not Found!",
+        });
+      }
+
+      return res.status(200).json({
+        message: "get product detail",
+        result: getProduct,
+      });
+    } catch (err) {
+      console.log(err);
       return res.status(500).json({
         message: "server error",
       });
